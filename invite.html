@@ -1,0 +1,684 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Александр & Ирина — 29.08.2026</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600&family=Inter:wght@300;400;500&family=Parisienne&display=swap" rel="stylesheet">
+
+  <style>
+    
+    :root{
+      --bg:#fbf8f2;
+      --paper:rgba(255,255,255,.82);
+      --ink:#1c1c1c;
+      --muted:#7c7c7c;
+      --line:rgba(0,0,0,.09);
+      --soft:rgba(0,0,0,.055);
+      --shadow:0 14px 44px rgba(0,0,0,.06);
+      --radius:22px;
+      --max: 940px;
+      --accentSoft:rgba(28,28,28,.06);
+    }
+    *{ box-sizing:border-box; }
+    body{
+      margin:0;
+      background:
+        radial-gradient(900px 540px at 10% 10%, rgba(0,0,0,.028), transparent 55%),
+        radial-gradient(700px 500px at 90% 20%, rgba(0,0,0,.022), transparent 60%),
+        var(--bg);
+      color:var(--ink);
+      font-family:"Cormorant Garamond", serif;
+    }
+    .wrap{ max-width:var(--max); margin:0 auto; padding:28px 16px 70px; }
+    .sheet{
+      background:var(--paper);
+      border:1px solid var(--soft);
+      border-radius:var(--radius);
+      box-shadow:var(--shadow);
+      overflow:hidden;
+      backdrop-filter: blur(7px);
+    }
+
+    /* Акцентный блок подтверждения */
+.confirmBlock{
+  margin-top:28px;
+  padding:36px 20px;
+  border-radius:20px;
+  background:rgba(255,255,255,.6);
+  border:1px solid var(--soft);
+  text-align:center;
+}
+.contactLine{
+  text-align:center;
+  margin-top:12px;
+}
+
+.contactLine a{
+  text-decoration:none;
+  color:rgba(28,28,28,.9);
+  font-family:Inter, system-ui, -apple-system, Segoe UI, Roboto, Arial;
+  font-size:13px;
+  letter-spacing:.08em;
+  border-bottom:1px solid rgba(28,28,28,.25);
+  padding-bottom:2px;
+  transition: all .15s ease;
+}
+
+.contactLine a:hover{
+  border-color:rgba(28,28,28,.6);
+  color:rgba(28,28,28,1);
+}
+
+.confirmTitle{
+  font-family:Inter, system-ui, -apple-system, Segoe UI, Roboto, Arial;
+  font-size:11px;
+  letter-spacing:.28em;
+  text-transform:uppercase;
+  color:rgba(28,28,28,.55);
+  margin-bottom:16px;
+}
+
+.confirmText{
+  font-size:24px;
+  line-height:1.6;
+  font-weight:500;
+  color:rgba(28,28,28,.95);
+}
+
+.confirmText span{
+  display:inline-block;
+  margin-top:8px;
+  font-size:30px;
+  font-weight:600;
+  letter-spacing:.05em;
+  color:rgba(28,28,28,1);
+}
+
+
+    /* верх */
+    .top{
+      display:flex; justify-content:space-between; align-items:center;
+      padding:16px 20px;
+      border-bottom:1px solid var(--soft);
+    }
+    .brand{ font-family:"Parisienne", cursive; font-size:26px; color:var(--ink); }
+    .nav{
+      display:flex; gap:10px; align-items:center;
+      font-family:Inter, system-ui, -apple-system, Segoe UI, Roboto, Arial;
+      font-size:11px;
+      letter-spacing:.18em;
+      text-transform:uppercase;
+      color:var(--muted);
+    }
+    .nav a{
+      color:var(--muted);
+      text-decoration:none;
+      padding:10px 12px;
+      border:1px solid var(--soft);
+      border-radius:999px;
+      background:rgba(255,255,255,.55);
+    }
+    .nav a:hover{ background:#fff; color:var(--ink); }
+
+    /* сетка */
+    .content{ display:grid; grid-template-columns: 1.05fr .95fr; }
+    @media (max-width: 900px){
+      .content{ grid-template-columns: 1fr; }
+      .right{ border-left:none !important; border-top:1px solid var(--soft); }
+    }
+    .left,.right{ padding:28px 24px 30px; }
+    .right{ border-left:1px solid var(--soft); }
+
+    /* типографика тоньше */
+h1{
+  margin:0;
+  font-size:40px;
+  line-height:1.18;
+  font-weight:400;
+  letter-spacing:.01em;
+  color:rgba(28,28,28,.92);
+}
+
+.titleSoft{
+  display:block;
+  font-size:34px;
+  font-weight:400;
+  letter-spacing:.015em;
+  color:rgba(28,28,28,.75);
+  margin-bottom:6px;
+}
+
+.names{
+  display:block;
+  font-family:"Parisienne", cursive;
+  font-size:46px;
+  line-height:1;
+  margin-top:12px;
+  letter-spacing:.02em;
+  color:rgba(28,28,28,.95);
+}
+    .sub{
+      margin:12px 0 0;
+      color:var(--muted);
+      font-size:15px;
+      line-height:1.7;
+      letter-spacing:.01em;
+    }
+
+    .block{ margin-top:22px; padding-top:18px; border-top:1px solid var(--soft); }
+    .head{
+      display:flex; justify-content:space-between; align-items:baseline; gap:10px;
+      margin-bottom:10px;
+    }
+.head h2{
+  margin:0;
+  font-size:20px;
+  font-weight:600;
+  letter-spacing:.04em;
+  color:rgba(28,28,28,.98);
+}
+
+.p strong{
+  margin:0;
+  font-size:15px;
+  font-weight:600;
+  letter-spacing:.04em;
+  color:rgba(28,28,28,.98);
+}
+
+
+.tag{
+  font-family:Inter, system-ui, -apple-system, Segoe UI, Roboto, Arial;
+  font-size:10px;
+  letter-spacing:.28em;
+  text-transform:uppercase;
+  color:rgba(28,28,28,.65);
+}
+    .p{ margin:10px 0; color:var(--muted); font-size:15px; line-height:1.75; }
+
+    /* фото пары */
+    .photo{
+      width:100%;
+      aspect-ratio: 3 / 4;
+      border-radius:18px;
+      border:1px solid var(--soft);
+      overflow:hidden;
+      background:#fff;
+    }
+    .photo img{
+      width:100%; height:100%; object-fit:cover; display:block;
+      filter: grayscale(100%) contrast(0.98) brightness(1.03);
+    }
+
+    /* мини-фото локации 2 колонки */
+    .places{
+      display:grid;
+      grid-template-columns: 1fr 1fr;
+      gap:10px;
+      margin-top:12px;
+    }
+    .mini{
+      aspect-ratio: 4 / 3;
+      border-radius:16px;
+      border:1px solid var(--soft);
+      overflow:hidden;
+      background:#fff;
+    }
+    .mini img{
+      width:100%; height:100%; object-fit:cover; display:block;
+      filter: grayscale(100%) contrast(0.98) brightness(1.04);
+    }
+
+    /* тайминг как Taplink */
+    .timeline{ margin-top:10px; }
+    .titem{
+      display:grid;
+      grid-template-columns: 74px 1fr;
+      gap:12px;
+      padding:10px 0;
+      border-bottom:1px dashed rgba(0,0,0,.08);
+    }
+    .titem:last-child{ border-bottom:none; }
+    .time{
+      font-family:Inter, system-ui, -apple-system, Segoe UI, Roboto, Arial;
+      font-size:10px;
+      letter-spacing:.22em;
+      text-transform:uppercase;
+      color:var(--muted);
+      padding-top:4px;
+    }
+    .ttext{ color:var(--muted); font-size:15px; line-height:1.6; }
+
+    /* календарь */
+    .cal{
+      margin-top:12px;
+      border:1px solid var(--soft);
+      border-radius:18px;
+      background:rgba(255,255,255,.72);
+      overflow:hidden;
+    }
+    .calTop{
+      display:flex; justify-content:space-between; align-items:center;
+      padding:12px 14px;
+      border-bottom:1px solid var(--soft);
+    }
+    .calTop .month{
+      font-family:Inter, system-ui, -apple-system, Segoe UI, Roboto, Arial;
+      font-size:10px;
+      letter-spacing:.22em;
+      text-transform:uppercase;
+      color:var(--muted);
+    }
+    .calTop .date{
+      font-family:"Parisienne", cursive;
+      font-size:26px;
+      color:var(--ink);
+    }
+    .dow, .grid{
+      display:grid;
+      grid-template-columns: repeat(7, 1fr);
+    }
+    .dow div{
+      padding:10px 0 8px;
+      text-align:center;
+      font-family:Inter, system-ui, -apple-system, Segoe UI, Roboto, Arial;
+      font-size:9px;
+      letter-spacing:.24em;
+      text-transform:uppercase;
+      color:var(--muted);
+    }
+    .grid button{
+      border:0;
+      background:transparent;
+      padding:10px 0;
+      font-family:Inter, system-ui, -apple-system, Segoe UI, Roboto, Arial;
+      font-size:11px;
+      color:rgba(28,28,28,.9);
+      cursor:default;
+    }
+    .grid button.muted{ color:rgba(28,28,28,.22); }
+    .grid button.sel{
+      position:relative;
+      color:var(--ink);
+      font-weight:600;
+    }
+.grid button.sel::after{
+  content:"";
+  position:absolute;
+  left:50%; top:50%;
+  width:32px; height:32px;
+  transform:translate(-50%,-50%);
+  border-radius:999px;
+  border:1px solid rgba(28,28,28,.28);
+  background: rgba(28,28,28,.14);
+  box-shadow: 0 10px 24px rgba(0,0,0,.10);
+  z-index:-1;
+}
+.grid button.sel{
+  font-weight:700;
+  color: var(--ink);
+}
+
+    /* кнопки */
+    .btnRow{ display:flex; gap:10px; flex-wrap:wrap; margin-top:14px; }
+    .btn{
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      padding:12px 14px;
+      border-radius:999px;
+      border:1px solid var(--line);
+      background:rgba(255,255,255,.55);
+      color:var(--ink);
+      text-decoration:none;
+      font-family:Inter, system-ui, -apple-system, Segoe UI, Roboto, Arial;
+      font-size:11px;
+      letter-spacing:.18em;
+      text-transform:uppercase;
+      cursor:pointer;
+    }
+    .btn:hover{ background:#fff; }
+
+    .sign{
+      margin-top:18px;
+      text-align:center;
+      color:var(--muted);
+      font-size:14px;
+    }
+    .sign .love{
+      font-family:"Parisienne", cursive;
+      font-size:32px;
+      color:var(--ink);
+      margin-top:6px;
+    }
+    .btnPrimary{
+  background: rgba(28,28,28,.86);
+  color: #fff;
+  border-color: rgba(28,28,28,.86);
+  box-shadow: 0 10px 26px rgba(0,0,0,.14);
+}
+.btnPrimary:hover{
+  background: rgba(28,28,28,.95);
+  border-color: rgba(28,28,28,.95);
+}
+
+.footerFull{
+  border-top:1px solid var(--soft);
+  margin-top:30px;
+  padding:40px 24px 50px;
+  background:rgba(255,255,255,.55);
+}
+
+.footerInner{
+  max-width:1100px;
+  margin:0 auto;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:40px;
+  flex-wrap:wrap;
+}
+
+.footerPhoto{
+  flex:1 1 360px;
+  border-radius:18px;
+  overflow:hidden;
+  border:1px solid var(--soft);
+}
+
+.footerPhoto img{
+  width:100%;
+  display:block;
+  filter:grayscale(100%) contrast(0.98) brightness(1.05);
+}
+
+.footerText{
+  flex:1 1 360px;
+  text-align:center;
+}
+
+.footerBtn{
+  padding:14px 22px;
+  font-size:12px;
+  letter-spacing:.22em;
+  margin-bottom:30px;
+}
+
+.footerSign .soft{
+  font-size:14px;
+  color:var(--muted);
+  margin-bottom:8px;
+}
+
+.namesBig{
+  font-family:"Parisienne", cursive;
+  font-size:46px;
+  line-height:1.1;
+  color:rgba(28,28,28,.95);
+}
+
+.tday{
+  margin-top:18px;
+  margin-bottom:6px;
+   font-weight:600;
+  font-family:Inter, system-ui, -apple-system, Segoe UI, Roboto, Arial;
+  font-size:14px;
+  letter-spacing:.28em;
+  text-transform:uppercase;
+  color:rgba(28,28,28,.55);
+}
+
+.time{
+font-weight:500;
+  font-size:10px;
+  letter-spacing:.28em;
+  text-transform:uppercase;
+  color:rgba(28,28,28,.55);
+}
+  </style>
+</head>
+
+<body>
+  <div class="wrap">
+    <div class="sheet">
+      <div class="top">
+        <div class="brand">LoveTime</div>
+        <div class="nav">
+          <a href="rsvp.html">Заполнить форму</a>
+        </div>
+      </div>
+
+      <div class="content">
+        <!-- LEFT -->
+        <div class="left">
+<h1>
+  <span class="titleSoft">Приглашение на свадьбу</span>
+  <span class="names">Александра&nbsp;&nbsp;&amp;&nbsp;&nbsp;Ирины</span>
+</h1>
+          <p class="sub">29 августа 2026 · г. Киров</p>
+
+          <div class="block">
+            <div class="head">
+              <h2>Мы</h2>
+              <div class="tag">Фото</div>
+            </div>
+            <div class="photo">
+              <img src="invite.png" alt="Александр и Ирина">
+        
+            </div>
+          </div>
+          <div class="block">
+  <div class="head">
+    <h2>Информация</h2>
+    <div class="tag">Важно</div>
+  </div>
+
+  <p class="p" style="margin-top:14px;">
+    <strong>Меню</strong><br/>
+    Меню разнообразное, поэтому сообщите нам заранее, если у вас есть какие-либо предпочтения или диетические ограничения.
+    После подтверждения вы сможете пройти опрос о своих вкусовых предпочтениях и напитках.
+  </p>
+
+  <p class="p">
+    <strong>Пожелания по подаркам</strong><br/>
+    Ваше присутствие в день нашей свадьбы — самый значимый подарок для нас!<br/>
+    Мы понимаем, что дарить цветы на свадьбу — это традиция, но мы не сможем насладиться их красотой в полной мере…
+    <br/>Будем рады любой другой альтернативе (вино или в денежном эквиваленте).
+  </p>
+
+  <p class="p">
+    <strong >Примечание</strong><br/>
+    Будем благодарны, если вы воздержитесь от криков «Горько» на празднике, ведь поцелуй — это знак выражения чувств,
+    он не может быть по заказу.
+  </p>
+
+<div class="confirmBlock">
+  <div class="confirmTitle">Подтверждение</div>
+  <div class="confirmText">
+    Пожалуйста подтвердите свое присутствие<br>
+    до <span>31.05.2026</span>
+      </div>
+      <p class="p contactLine">
+  Если у вас есть вопросы — напишите нам<br>
+  <a href="https://t.me/qazwsxedcyy" target="_blank">Ирина</a>
+  &nbsp;&nbsp;·&nbsp;&nbsp;
+  <a href="https://t.me/lee_eev" target="_blank">Александр</a>
+</p>
+</div>
+</div>
+        </div>
+        <!-- RIGHT -->
+        <div class="right">
+          <div class="head">
+            <h2>Детали</h2>
+            <div class="tag">Информация</div>
+          </div>
+
+          <p class="p">
+            <strong>Дата:</strong> 29.08.2026<br/>
+            <strong>Город:</strong> Киров<br/>
+            <strong>Время:</strong> (добавим позже)<br/>
+            <strong>Адрес:</strong> <span id="addrInline">(вставь адрес внизу в скрипте)</span>
+          </p>
+
+          <div class="block">
+            <div class="head">
+              <h2>Тайминг</h2>
+              <div class="tag">Программа</div>
+            </div>
+
+<div class="timeline">
+
+  <div class="tday">28.08.2026</div>
+
+  <div class="titem">
+    <div class="time">До 00:00</div>
+    <div class="ttext">Приезд гостей и заселение (Для вашего удобства будет арендован дом на все выходные)</div>
+  </div>
+
+  <div class="tday">29.08.2026</div>
+
+  <div class="titem">
+    <div class="time">17:30</div>
+    <div class="ttext">Фуршет</div>
+  </div>
+
+  <div class="titem">
+    <div class="time">18:00</div>
+    <div class="ttext">Церемония</div>
+  </div>
+
+  <div class="titem">
+    <div class="time">19:00</div>
+    <div class="ttext">Банкет</div>
+  </div>
+
+  <div class="titem">
+    <div class="time">23:00</div>
+    <div class="ttext">Торт и завершение вечера</div>
+  </div>
+
+    <div class="tday">30.08.2026</div>
+
+  <div class="titem">
+    <div class="time"> </div>
+    <div class="ttext">Второй день</div>
+  </div>
+
+</div>
+
+          <div class="block">
+            <div class="head">
+              <h2>Календарь</h2>
+              <div class="tag">Август 2026</div>
+            </div>
+
+            <div class="cal" aria-label="Календарь">
+              <div class="calTop">
+                <div class="month">Август 2026</div>
+                <div class="date">29·08</div>
+              </div>
+              <div class="dow">
+                <div>ПН</div><div>ВТ</div><div>СР</div><div>ЧТ</div><div>ПТ</div><div>СБ</div><div>ВС</div>
+              </div>
+              <div class="grid" id="calGrid"></div>
+            </div>
+                  <div class="block">
+            <div class="head">
+              <h2>Локация</h2>
+              <div class="tag">Фото места</div>
+            </div>
+
+            <div class="places">
+              <div class="mini"><img src="photos/place1.jpg" alt="Локация 1"></div>
+              <div class="mini"><img src="photos/place2.jpg" alt="Локация 2"></div>
+              <div class="mini"><img src="photos/place3.jpg" alt="Локация 3"></div>
+              <div class="mini"><img src="photos/place4.jpg" alt="Локация 4"></div>
+            </div>
+
+            <div class="btnRow">
+              <a class="btn" id="yandexBtn" href="#" target="_blank" rel="noopener">Открыть в Яндекс</a>
+              <a class="btn" id="googleBtn" href="#" target="_blank" rel="noopener">Открыть в Google</a>
+            </div>
+
+            <p class="p" id="addrText" style="margin-top:12px;"></p>
+          </div>
+          </div>
+
+        </div>
+      </div>
+      
+    </div>
+            <div class="footerFull">
+  <div class="footerInner">
+
+    <div class="footerPhoto">
+      <img src="hand.jpg" alt="Александр и Ирина">
+    </div>
+
+    <div class="footerText">
+      <a class="btn btnPrimary footerBtn" href="rsvp.html">
+        Заполнить форму
+      </a>
+
+      <div class="footerSign">
+        <div class="soft">С любовью,</div>
+        <div class="namesBig">Александр и Ирина</div>
+      </div>
+    </div>
+
+  </div>
+</div>
+  </div>
+
+  <script>
+    // === ВСТАВЬ АДРЕС ПЛОЩАДКИ СЮДА ===
+    // Пример: "Киров, ул. Ленина, 1, ресторан «Natura»"
+    const VENUE_ADDRESS = "улица Ленина, 101А, Киров";
+
+    // Ссылка на Яндекс и Google карты
+    const yandexLink = "https://yandex.ru/maps/?text=" + encodeURIComponent(VENUE_ADDRESS);
+    const googleLink = "https://www.google.com/maps/search/?api=1&query=" + encodeURIComponent(VENUE_ADDRESS);
+
+    document.getElementById("yandexBtn").href = yandexLink;
+    document.getElementById("googleBtn").href = googleLink;
+
+    document.getElementById("addrInline").textContent = VENUE_ADDRESS;
+    document.getElementById("addrText").textContent = "Адрес: " + VENUE_ADDRESS;
+
+    // Календарь: Август 2026, выделяем 29
+    const year = 2026;
+    const monthIndex = 7; // 0=Jan ... 7=Aug
+    const selectedDay = 29;
+
+    // Пн=0 ... Вс=6
+    function mondayFirstIndex(jsDay){ // jsDay: 0=Sun..6=Sat
+      return (jsDay + 6) % 7; // Sun->6, Mon->0
+    }
+
+    const grid = document.getElementById("calGrid");
+    const first = new Date(year, monthIndex, 1);
+    const daysInMonth = new Date(year, monthIndex + 1, 0).getDate();
+    const start = mondayFirstIndex(first.getDay());
+
+    for(let i=0;i<42;i++){
+      const btn = document.createElement("button");
+      const dayNum = i - start + 1;
+      if(dayNum < 1 || dayNum > daysInMonth){
+        btn.textContent = "";
+        btn.className = "muted";
+        btn.disabled = true;
+      } else {
+        btn.textContent = String(dayNum);
+        if(dayNum === selectedDay) btn.classList.add("sel");
+        btn.disabled = true;
+      }
+      grid.appendChild(btn);
+    }
+  </script>
+</body>
+</html>

@@ -1,0 +1,676 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>RSVP — Александр & Ирина</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600&family=Inter:wght@300;400;500&family=Parisienne&display=swap" rel="stylesheet">
+
+  <style>
+    :root{
+      --bg:#fbf8f2;
+      --paper:rgba(255,255,255,.82);
+      --ink:#1c1c1c;
+      --muted:#7c7c7c;
+      --line:rgba(0,0,0,.09);
+      --soft:rgba(0,0,0,.055);
+      --shadow:0 14px 44px rgba(0,0,0,.06);
+      --radius:22px;
+      --max: 740px;
+    }
+    *{ box-sizing:border-box; }
+    body{
+      margin:0;
+      background: radial-gradient(900px 540px at 10% 10%, rgba(0,0,0,.028), transparent 55%), var(--bg);
+      color:var(--ink);
+      font-family:"Cormorant Garamond", serif;
+    }
+    .wrap{ max-width:var(--max); margin:0 auto; padding:28px 16px 70px; }
+    .card{
+      background:var(--paper);
+      border:1px solid var(--soft);
+      border-radius:var(--radius);
+      box-shadow:var(--shadow);
+      overflow:hidden;
+      backdrop-filter: blur(7px);
+    }
+    .top{
+      display:flex; justify-content:space-between; align-items:center;
+      padding:16px 20px;
+      border-bottom:1px solid var(--soft);
+    }
+    .brand{ font-family:"Parisienne", cursive; font-size:26px; }
+    .top a{
+      font-family:Inter, system-ui, -apple-system, Segoe UI, Roboto, Arial;
+      font-size:11px;
+      letter-spacing:.18em;
+      text-transform:uppercase;
+      color:var(--muted);
+      text-decoration:none;
+      padding:10px 12px;
+      border:1px solid var(--soft);
+      border-radius:999px;
+      background:rgba(255,255,255,.55);
+    }
+    .top a:hover{ background:#fff; color:var(--ink); }
+
+    .body{ padding:26px 22px 28px; }
+    h1{ margin:0; font-size:36px; font-weight:500; line-height:1.05; }
+    .sub{ margin:10px 0 0; color:var(--muted); font-size:15px; line-height:1.75; }
+
+    .block{ margin-top:18px; padding-top:16px; border-top:1px solid var(--soft); }
+    .tag{
+      font-family:Inter, system-ui, -apple-system, Segoe UI, Roboto, Arial;
+      font-size:10px;
+      letter-spacing:.22em;
+      text-transform:uppercase;
+      color:var(--muted);
+      margin-bottom:10px;
+    }
+
+    label{
+      display:block;
+      margin:12px 0 6px;
+      font-family:Inter, system-ui, -apple-system, Segoe UI, Roboto, Arial;
+      font-size:10px;
+      letter-spacing:.22em;
+      text-transform:uppercase;
+      color:var(--muted);
+    }
+    input, select, textarea{
+      width:100%;
+      padding:12px 12px;
+      border-radius:14px;
+      border:1px solid var(--soft);
+      background:#fff;
+      color:var(--ink);
+      outline:none;
+      font-family:Inter, system-ui, -apple-system, Segoe UI, Roboto, Arial;
+      font-size:14px;
+    }
+    textarea{ min-height:92px; resize:vertical; }
+
+    .btn{
+      width:100%;
+      margin-top:14px;
+      padding:12px 14px;
+      border-radius:999px;
+      border:1px solid var(--line);
+      background:rgba(255,255,255,.55);
+      font-family:Inter, system-ui, -apple-system, Segoe UI, Roboto, Arial;
+      font-size:11px;
+      letter-spacing:.18em;
+      text-transform:uppercase;
+      cursor:pointer;
+    }
+    .btn:hover{ background:#fff; }
+    .btn:disabled{ opacity:.6; cursor:not-allowed; }
+
+    .inlineBtns{ display:flex; gap:10px; flex-wrap:wrap; margin-top:10px; }
+    .inlineBtns .btn{ width:auto; margin-top:0; }
+
+    .ok,.err{
+      display:none;
+      margin-top:12px;
+      padding:10px 12px;
+      border-radius:14px;
+      border:1px solid var(--soft);
+      font-family:Inter, system-ui, -apple-system, Segoe UI, Roboto, Arial;
+      font-size:13px;
+      color:var(--muted);
+      background:#fff;
+    }
+    .note{ margin-top:10px; color:var(--muted); font-size:13px; line-height:1.6; }
+
+    /* Радио-кнопки аккуратно */
+.choiceGrid{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:10px;
+  margin-top:6px;
+}
+@media (max-width:520px){ .choiceGrid{ grid-template-columns:1fr; } }
+
+.choice{
+  border:1px solid var(--soft);
+  border-radius:14px;
+  background:rgba(255,255,255,.72);
+  padding:12px 12px;
+  display:flex;
+  align-items:center;
+  gap:12px;
+  cursor:pointer;
+  transition: background .15s ease, border-color .15s ease, transform .15s ease;
+}
+.choice:hover{
+  background:#fff;
+  border-color:rgba(0,0,0,.08);
+}
+.choice:active{ transform: translateY(1px); }
+
+/* прячем нативный input, рисуем свой */
+.choice input{
+  position:absolute;
+  opacity:0;
+  pointer-events:none;
+}
+
+.dot{
+  width:18px;
+  height:18px;
+  border-radius:999px;
+  border:1px solid rgba(0,0,0,.12);
+  background:rgba(0,0,0,.02);
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  flex:0 0 18px;
+}
+.dot::after{
+  content:"";
+  width:8px;
+  height:8px;
+  border-radius:999px;
+  background:transparent;
+}
+
+/* состояние “выбрано” */
+.choice input:checked + .dot{
+  border-color:rgba(0,0,0,.16);
+  background:rgba(0,0,0,.04);
+}
+.choice input:checked + .dot::after{
+  background:rgba(0,0,0,.55);
+}
+
+.ctext{
+  display:flex;
+  flex-direction:column;
+  gap:2px;
+}
+.ctitle{
+  font-family:Inter, system-ui, -apple-system, Segoe UI, Roboto, Arial;
+  font-size:13px;
+  color:var(--ink);
+  letter-spacing:.01em;
+}
+
+.choice input[type="checkbox"]:checked + .dot::after{
+  background:rgba(28,28,28,.75);
+}
+.csub{
+  font-family:Inter, system-ui, -apple-system, Segoe UI, Roboto, Arial;
+  font-size:12px;
+  color:var(--muted);
+  line-height:1.4;}
+
+  /* Единый нежный выбор (radio/checkbox) */
+.choiceGrid{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:10px;
+  margin-top:6px;
+}
+@media (max-width:520px){ .choiceGrid{ grid-template-columns:1fr; } }
+
+.choice{
+  border:1px solid var(--soft);
+  border-radius:14px;
+  background:rgba(255,255,255,.78);
+  padding:12px 12px;
+  display:flex;
+  align-items:flex-start;
+  gap:12px;
+  cursor:pointer;
+  transition: background .15s ease, border-color .15s ease, transform .15s ease;
+}
+.choice:hover{
+  background:#fff;
+  border-color:rgba(0,0,0,.08);
+}
+.choice:active{ transform: translateY(1px); }
+
+/* Скрываем нативные radio/checkbox, чтобы не было “кружков справа” */
+.choice input{
+  position:absolute;
+  opacity:0;
+  pointer-events:none;
+}
+
+/* Индикатор */
+.dot{
+  width:18px;
+  height:18px;
+  border-radius:999px;
+  border:1px solid rgba(0,0,0,.12);
+  background:rgba(0,0,0,.02);
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  flex:0 0 18px;
+  margin-top:2px;
+}
+.dot::after{
+  content:"";
+  width:8px;
+  height:8px;
+  border-radius:999px;
+  background:transparent;
+}
+
+/* radio checked */
+.choice input[type="radio"]:checked + .dot{
+  border-color:rgba(0,0,0,.16);
+  background:rgba(0,0,0,.04);
+}
+.choice input[type="radio"]:checked + .dot::after{
+  background:rgba(0,0,0,.58);
+}
+
+/* checkbox checked (чуть плотнее) */
+.choice input[type="checkbox"]:checked + .dot{
+  border-color:rgba(0,0,0,.18);
+  background:rgba(0,0,0,.05);
+}
+.choice input[type="checkbox"]:checked + .dot::after{
+  width:10px;
+  height:10px;
+  background:rgba(0,0,0,.62);
+}
+
+.ctext{ display:flex; flex-direction:column; gap:2px; }
+.ctitle{
+  font-family:Inter, system-ui, -apple-system, Segoe UI, Roboto, Arial;
+  font-size:13px;
+  color:var(--ink);
+  letter-spacing:.01em;
+  line-height:1.25;
+}
+.csub{
+  font-family:Inter, system-ui, -apple-system, Segoe UI, Roboto, Arial;
+  font-size:12px;
+  color:var(--muted);
+  line-height:1.35;
+}
+
+  </style>
+</head>
+
+<body>
+  <div class="wrap">
+    <div class="card">
+      <div class="top">
+        <div class="brand">Invite</div>
+        <a href="index.html">На главную</a>
+      </div>
+
+      <div class="body">
+        <h1>Александр & Ирина</h1>
+        <p class="sub">Пожалуйста, подтвердите участие. После каждого добавленного гостя можно добавить ещё или завершить.</p>
+
+        <!-- Шаг 1: основной гость -->
+        <div class="block" id="stepMain">
+          <div class="tag">Ваши данные</div>
+
+          <form id="mainForm">
+            <label>Имя и фамилия *</label>
+            <input name="name" required placeholder="Например: Мария Иванова">
+
+            <label>Телефон</label>
+            <input name="phone" placeholder="+7 …">
+
+            <label>Вы сможете прийти? *</label>
+            <select name="attendance" required>
+              <option value="" disabled selected>Выберите…</option>
+              <option value="yes">Да, буду</option>
+              <option value="no">К сожалению, нет</option>
+              <option value="maybe">Пока не уверен(а)</option>
+            </select>
+
+<label>Как вы планируете добираться? *</label>
+<div class="choiceGrid" role="radiogroup" aria-label="Транспорт">
+  <label class="choice">
+    <input type="radio" name="transport" value="self" required>
+    <span class="dot"></span>
+    <span class="ctext">
+      <span class="ctitle">Своим ходом</span>
+      <span class="csub">Доберусь самостоятельно (могу кого-нибудь захватить)</span>
+    </span>
+  </label>
+
+  <label class="choice">
+    <input type="radio" name="transport" value="need" required>
+    <span class="dot"></span>
+    <span class="ctext">
+      <span class="ctitle">Нужен транспорт</span>
+      <span class="csub">Нужно найти попутчика</span>
+    </span>
+  </label>
+</div>
+<label>Предпочтения по алкоголю</label>
+
+<div class="choiceGrid">
+
+  <label class="choice">
+    <input type="checkbox" name="alcohol" value="wine">
+    <span class="dot"></span>
+    <span class="ctext">
+      <span class="ctitle">Вино</span>
+      <span class="csub">Красное / белое</span>
+    </span>
+  </label>
+
+  <label class="choice">
+    <input type="checkbox" name="alcohol" value="champagne">
+    <span class="dot"></span>
+    <span class="ctext">
+      <span class="ctitle">Шампанское</span>
+    </span>
+  </label>
+
+  <label class="choice">
+    <input type="checkbox" name="alcohol" value="strong">
+    <span class="dot"></span>
+    <span class="ctext">
+      <span class="ctitle">Крепкий алкоголь</span>
+    </span>
+  </label>
+
+  <label class="choice">
+    <input type="checkbox" name="alcohol" value="no">
+    <span class="dot"></span>
+    <span class="ctext">
+      <span class="ctitle">Не употребляю</span>
+    </span>
+  </label>
+
+</div>
+
+            <label>Комментарий / пожелания</label>
+            <textarea name="comment" placeholder="Например: аллергии, питание, вопросы…"></textarea>
+
+            <button class="btn" id="mainSendBtn" type="submit">Отправить</button>
+            <div class="ok" id="mainOk">Спасибо! Ответ записан.</div>
+            <div class="err" id="mainErr">Не получилось отправить. Проверьте SCRIPT_URL и доступ деплоя.</div>
+
+            <div class="note">Отправляя форму, вы соглашаетесь на обработку данных для организации мероприятия.</div>
+          </form>
+        </div>
+
+        <!-- Шаг 2: спросить, добавить гостя? -->
+        <div class="block" id="stepAsk" style="display:none;">
+          <div class="tag">Дополнительные гости</div>
+          <p class="sub" style="margin:0;">Добавить ещё одного гостя?</p>
+          <div class="inlineBtns">
+            <button class="btn" id="addGuestBtn" type="button">Да, добавить гостя</button>
+            <button class="btn" id="finishBtn1" type="button">Завершить</button>
+          </div>
+        </div>
+
+        <!-- Шаг 3: форма гостя (повторяемая) -->
+        <div class="block" id="stepGuest" style="display:none;">
+          <div class="tag" id="guestTag">Гость</div>
+
+          <form id="guestForm">
+            <label>Имя и фамилия гостя *</label>
+            <input name="name" required placeholder="Например: Иван Петров">
+
+            <label>Телефон (если нужно)</label>
+            <input name="phone" placeholder="+7 …">
+
+            <label>Гость сможет прийти? *</label>
+            <select name="attendance" required>
+              <option value="" disabled selected>Выберите…</option>
+              <option value="yes">Да</option>
+              <option value="no">Нет</option>
+              <option value="maybe">Пока не уверен(а)</option>
+            </select>
+
+            <label>Как гость планирует добираться? *</label>
+<div class="choiceGrid" role="radiogroup" aria-label="Транспорт гостя">
+  <label class="choice">
+    <input type="radio" name="transport" value="self" required>
+    <span class="dot"></span>
+    <span class="ctext">
+      <span class="ctitle">Своим ходом</span>
+      <span class="csub">Доберётся самостоятельно</span>
+    </span>
+  </label>
+
+  <label class="choice">
+    <input type="radio" name="transport" value="need" required>
+    <span class="dot"></span>
+    <span class="ctext">
+      <span class="ctitle">Нужен транспорт</span>
+      <span class="csub">Нужен трансфер/подвоз</span>
+    </span>
+  </label>
+</div>
+<label>Предпочтения по алкоголю</label>
+<div class="choiceGrid" aria-label="Алкоголь">
+  <label class="choice">
+    <input type="checkbox" name="alcohol" value="wine">
+    <span class="dot"></span>
+    <span class="ctext">
+      <span class="ctitle">Вино</span>
+      <span class="csub">Красное / белое</span>
+    </span>
+  </label>
+
+  <label class="choice">
+    <input type="checkbox" name="alcohol" value="champagne">
+    <span class="dot"></span>
+    <span class="ctext">
+      <span class="ctitle">Шампанское</span>
+      <span class="csub">Игристое</span>
+    </span>
+  </label>
+
+  <label class="choice">
+    <input type="checkbox" name="alcohol" value="strong">
+    <span class="dot"></span>
+    <span class="ctext">
+      <span class="ctitle">Крепкий алкоголь</span>
+      <span class="csub">Например: виски/водка</span>
+    </span>
+  </label>
+
+  <label class="choice">
+    <input type="checkbox" name="alcohol" value="no">
+    <span class="dot"></span>
+    <span class="ctext">
+      <span class="ctitle">Не употребляю</span>
+      <span class="csub">Без алкоголя</span>
+    </span>
+  </label>
+</div>
+            <label>Комментарий / пожелания</label>
+            <textarea name="comment" placeholder="Аллергии/питание/прочее…"></textarea>
+
+            <button class="btn" id="guestSendBtn" type="submit">Отправить гостя</button>
+            <div class="ok" id="guestOk">Гость добавлен.</div>
+            <div class="err" id="guestErr">Не получилось отправить. Попробуйте ещё раз.</div>
+          </form>
+        </div>
+
+        <!-- Шаг 4: после добавления гостя — снова спросить -->
+        <div class="block" id="stepAskAfterGuest" style="display:none;">
+          <div class="tag">Ещё гости?</div>
+          <p class="sub" style="margin:0;">Добавить ещё одного гостя или завершить?</p>
+          <div class="inlineBtns">
+            <button class="btn" id="addMoreBtn" type="button">Добавить ещё</button>
+            <button class="btn" id="finishBtn2" type="button">Завершить</button>
+          </div>
+        </div>
+
+        <!-- Финал -->
+        <div class="block" id="stepDone" style="display:none;">
+          <div class="tag">Готово</div>
+          <p class="sub" style="margin:0;">Спасибо! Мы получили ваш ответ 💛</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // Вставь Web App URL Apps Script (заканчивается на /exec)
+    const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbwBrwtxJ0hSFTO5kOIn5KjSs42AapOU-eU8INyykdzUkL5OPMnaXqSyAe8fupHc_8gJPA/exec";
+
+    // шаги
+    const stepMain = document.getElementById("stepMain");
+    const stepAsk = document.getElementById("stepAsk");
+    const stepGuest = document.getElementById("stepGuest");
+    const stepAskAfterGuest = document.getElementById("stepAskAfterGuest");
+    const stepDone = document.getElementById("stepDone");
+
+    // формы
+    const mainForm = document.getElementById("mainForm");
+    const guestForm = document.getElementById("guestForm");
+
+    // кнопки
+    const addGuestBtn = document.getElementById("addGuestBtn");
+    const finishBtn1 = document.getElementById("finishBtn1");
+    const addMoreBtn = document.getElementById("addMoreBtn");
+    const finishBtn2 = document.getElementById("finishBtn2");
+
+    const mainSendBtn = document.getElementById("mainSendBtn");
+    const guestSendBtn = document.getElementById("guestSendBtn");
+
+    // сообщения
+    const mainOk = document.getElementById("mainOk");
+    const mainErr = document.getElementById("mainErr");
+    const guestOk = document.getElementById("guestOk");
+    const guestErr = document.getElementById("guestErr");
+
+    const guestTag = document.getElementById("guestTag");
+
+    // group_id связывает все записи
+    let groupId = null;
+    let guestCount = 0;
+
+    function makeGroupId(){
+      return "g_" + Date.now().toString(36) + "_" + Math.random().toString(36).slice(2, 8);
+    }
+
+    async function postRSVP(payload){
+      const res = await fetch(SCRIPT_URL, {
+        method: "POST",
+        headers: { "Content-Type": "text/plain;charset=utf-8" },
+        body: JSON.stringify(payload),
+      });
+      const json = await res.json().catch(() => ({}));
+      return { ok: res.ok && json.ok, json };
+    }
+
+    function show(el){ el.style.display = ""; }
+    function hide(el){ el.style.display = "none"; }
+
+    // helper: form -> object
+    function formToObj(form){
+      return Object.fromEntries(new FormData(form).entries());
+    }
+
+    // 1) отправка основного гостя
+    mainForm.addEventListener("submit", async (e) => {
+      e.preventDefault();
+      mainOk.style.display = "none";
+      mainErr.style.display = "none";
+
+      const data = formToObj(mainForm);
+      groupId = makeGroupId();
+
+      mainSendBtn.disabled = true;
+      mainSendBtn.textContent = "Отправляем…";
+
+      try {
+        const r = await postRSVP({ group_id: groupId, role: "main", ...data });
+        if (r.ok) {
+          mainOk.style.display = "block";
+          setTimeout(() => { hide(stepMain); show(stepAsk); }, 450);
+        } else mainErr.style.display = "block";
+      } catch (err) {
+        mainErr.style.display = "block";
+      } finally {
+        mainSendBtn.disabled = false;
+        mainSendBtn.textContent = "Отправить";
+      }
+    });
+
+    // 2) после основного: добавить гостя / завершить
+    addGuestBtn.addEventListener("click", () => {
+      guestCount = 0;
+      guestTag.textContent = "Гость 1";
+      guestForm.reset();
+      guestOk.style.display = "none";
+      guestErr.style.display = "none";
+      hide(stepAsk);
+      show(stepGuest);
+    });
+
+    finishBtn1.addEventListener("click", () => {
+      hide(stepAsk);
+      show(stepDone);
+    });
+
+    // 3) отправка гостя
+    guestForm.addEventListener("submit", async (e) => {
+      e.preventDefault();
+      guestOk.style.display = "none";
+      guestErr.style.display = "none";
+
+      const data = formToObj(guestForm);
+
+      guestSendBtn.disabled = true;
+      guestSendBtn.textContent = "Отправляем…";
+
+      try {
+        guestCount += 1;
+        const r = await postRSVP({
+          group_id: groupId || makeGroupId(),
+          role: "guest",
+          ...data
+        });
+
+        if (r.ok) {
+          guestOk.style.display = "block";
+          // после успешной отправки гостя — спрашиваем, что дальше
+          setTimeout(() => {
+            hide(stepGuest);
+            show(stepAskAfterGuest);
+          }, 450);
+        } else {
+          // если ошибка — откатываем счетчик, чтобы номер не прыгал
+          guestCount -= 1;
+          guestErr.style.display = "block";
+        }
+      } catch (err) {
+        guestCount -= 1;
+        guestErr.style.display = "block";
+      } finally {
+        guestSendBtn.disabled = false;
+        guestSendBtn.textContent = "Отправить гостя";
+      }
+    });
+
+    // 4) после каждого гостя: добавить ещё / завершить
+    addMoreBtn.addEventListener("click", () => {
+      hide(stepAskAfterGuest);
+      show(stepGuest);
+
+      // готовим форму следующего гостя
+      guestTag.textContent = "Гость " + (guestCount + 1);
+      guestForm.reset();
+      guestOk.style.display = "none";
+      guestErr.style.display = "none";
+    });
+
+    finishBtn2.addEventListener("click", () => {
+      hide(stepAskAfterGuest);
+      show(stepDone);
+    });
+  </script>
+</body>
+</html>
