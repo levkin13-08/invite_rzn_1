@@ -2,7 +2,7 @@
 <html lang="ru">
 <head>
   <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
   <title>Александр & Ирина — 29.08.2026</title>
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -439,6 +439,103 @@ font-weight:500;
   text-transform:uppercase;
   color:rgba(28,28,28,.55);
 }
+
+/* =========================
+   Mobile / iPhone adaptive
+   ========================= */
+
+/* безопасные отступы под “чёлку” */
+:root{
+  --safe-top: env(safe-area-inset-top);
+  --safe-right: env(safe-area-inset-right);
+  --safe-bottom: env(safe-area-inset-bottom);
+  --safe-left: env(safe-area-inset-left);
+}
+
+/* чтобы элементы не распирали экран */
+img{ max-width:100%; height:auto; }
+.sheet, .card{ width:100%; }
+
+/* iOS: чтобы input не зумил страницу */
+input, select, textarea{ font-size:16px; }
+
+/* мобильная шапка */
+@media (max-width: 900px){
+  .wrap{
+    padding: 14px calc(12px + var(--safe-right)) calc(28px + var(--safe-bottom)) calc(12px + var(--safe-left));
+  }
+
+  .top{
+    padding: 12px 14px;
+  }
+
+  .nav a{
+    padding: 9px 11px;
+    font-size: 10px;
+  }
+
+  .content{
+    grid-template-columns: 1fr !important;
+  }
+
+  .left, .right{
+    padding: 18px 14px 22px;
+  }
+
+  h1{ font-size: 34px; }
+  .names{ font-size: 40px; }
+
+  .sub{ font-size: 14px; }
+
+  .photo{
+    border-radius:16px;
+  }
+
+  .places{
+    grid-template-columns: 1fr 1fr;
+    gap:8px;
+  }
+
+  .mini{
+    border-radius:14px;
+  }
+
+  .titem{
+    grid-template-columns: 62px 1fr;
+    gap:10px;
+  }
+
+  .time{ font-size:10px; }
+
+  .calTop .date{ font-size:22px; }
+}
+
+/* совсем узкие экраны */
+@media (max-width: 420px){
+  h1{ font-size: 30px; }
+  .names{ font-size: 36px; }
+
+  .places{
+    grid-template-columns: 1fr;
+  }
+
+  .btnRow{
+    gap:8px;
+  }
+
+  .btn{
+    width: 100%;
+  }
+
+  .confirmText{ font-size: 20px; }
+  .confirmText span{ font-size: 26px; }
+}
+
+/* чтобы футер/блоки не упирались в нижнюю панель iPhone */
+.footerFull{
+  padding-bottom: calc(44px + var(--safe-bottom));
+}
+
   </style>
 </head>
 
