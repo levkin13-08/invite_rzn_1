@@ -200,20 +200,24 @@
     }
 
     /* Фото */
-    .photo{
-      width:100%;
-      aspect-ratio: 3 / 4;
-      border-radius:18px;
-      border:1px solid var(--soft);
-      overflow:hidden;
-      background:#fff;
-    }
-    .photo img{
-      width:100%;
-      height:100%;
-      object-fit:cover;
-      filter: grayscale(100%) contrast(0.98) brightness(1.03);
-    }
+.photo{
+  width:100%;
+  aspect-ratio: 3 / 4;          /* рамка как была */
+  border-radius:18px;
+  border:1px solid var(--soft);
+  overflow:hidden;
+  background: rgba(255,255,255,.85); /* красивый фон под пустые поля */
+}
+
+.photo img{
+  width:100%;
+  height:100%;
+  object-fit: contain;           /* ВАЖНО: фото целиком */
+  object-position: center;
+  padding: 10px;                 /* чтобы не прилипало к краям */
+  display:block;
+  filter: grayscale(100%) contrast(0.98) brightness(1.03);
+}
 
     /* Тайминг */
     .timeline{ margin-top:10px; }
@@ -577,7 +581,7 @@
               <div class="tag">Фото</div>
             </div>
             <div class="photo">
-              <img src="invite.png" alt="Александр и Ирина">
+              <img src="invite.jpg" alt="Александр и Ирина">
             </div>
           </div>
 
@@ -782,3 +786,4 @@
   </script>
 </body>
 </html>
+
