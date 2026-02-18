@@ -20,7 +20,6 @@
       --shadow:0 14px 44px rgba(0,0,0,.06);
       --radius:22px;
       --max: 940px;
-      --accentSoft:rgba(28,28,28,.06);
 
       --safe-top: env(safe-area-inset-top);
       --safe-right: env(safe-area-inset-right);
@@ -29,11 +28,7 @@
     }
 
     *{ box-sizing:border-box; }
-    html, body{
-      width:100%;
-      overflow-x:hidden; /* убираем горизонтальный скролл */
-    }
-
+    html, body{ width:100%; overflow-x:hidden; }
     body{
       margin:0;
       background:
@@ -43,15 +38,9 @@
       color:var(--ink);
       font-family:"Cormorant Garamond", serif;
     }
-
     img{ max-width:100%; height:auto; display:block; }
 
-    .wrap{
-      max-width:var(--max);
-      margin:0 auto;
-      padding:28px 16px 70px;
-    }
-
+    .wrap{ max-width:var(--max); margin:0 auto; padding:28px 16px 70px; }
     .sheet{
       width:100%;
       background:var(--paper);
@@ -64,33 +53,22 @@
 
     /* Верх */
     .top{
-      display:flex;
-      justify-content:space-between;
-      align-items:center;
-      gap:12px;
-      padding:16px 20px;
-      border-bottom:1px solid var(--soft);
+      display:flex; justify-content:space-between; align-items:center; gap:12px;
+      padding:16px 20px; border-bottom:1px solid var(--soft);
     }
     .brand{
       font-family:"Parisienne", cursive;
-      font-size:26px;
-      color:var(--ink);
+      font-size:26px; color:var(--ink);
       white-space:nowrap;
     }
     .nav{
-      display:flex;
-      gap:10px;
-      align-items:center;
+      display:flex; gap:10px; align-items:center;
       font-family:Inter, system-ui, -apple-system, Segoe UI, Roboto, Arial;
-      font-size:11px;
-      letter-spacing:.18em;
-      text-transform:uppercase;
-      color:var(--muted);
+      font-size:11px; letter-spacing:.18em; text-transform:uppercase; color:var(--muted);
       flex:0 0 auto;
     }
     .nav a{
-      color:var(--muted);
-      text-decoration:none;
+      color:var(--muted); text-decoration:none;
       padding:10px 12px;
       border:1px solid var(--soft);
       border-radius:999px;
@@ -99,167 +77,128 @@
     }
     .nav a:hover{ background:#fff; color:var(--ink); }
 
-    /* Сетка */
+    /* ===== LAYOUT (с перестановкой на мобилке) ===== */
     .content{
       display:grid;
       grid-template-columns: 1.05fr .95fr;
+      grid-template-areas:
+        "leftTop right"
+        "leftInfo right";
     }
-    .left,.right{
-      padding:28px 24px 30px;
-      min-width:0; /* критично для grid — иначе тексты могут “вылезать” */
-    }
-    .right{
-      border-left:1px solid var(--soft);
-      min-width:0;
-    }
+    .leftTop{ grid-area:leftTop; padding:28px 24px 20px; min-width:0; }
+    .leftInfo{ grid-area:leftInfo; padding:0 24px 30px; min-width:0; }
+    .right{ grid-area:right; padding:28px 24px 30px; border-left:1px solid var(--soft); min-width:0; }
 
-    /* Типографика */
+    /* Типографика (нежнее + без переносов имён) */
     h1{
       margin:0;
-      font-size:40px;
-      line-height:1.18;
+      font-size:38px;
+      line-height:1.2;
       font-weight:400;
-      letter-spacing:.01em;
-      color:rgba(28,28,28,.92);
+      letter-spacing:.005em;
+      color:rgba(28,28,28,.88);
       overflow-wrap:anywhere;
       word-break:break-word;
     }
     .titleSoft{
       display:block;
-      font-size:34px;
+      font-size:30px;
       font-weight:400;
-      letter-spacing:.015em;
-      color:rgba(28,28,28,.75);
-      margin-bottom:6px;
+      letter-spacing:.012em;
+      color:rgba(28,28,28,.60);
+      margin-bottom:10px;
     }
     .names{
       display:block;
       font-family:"Parisienne", cursive;
-      font-size:46px;
-      line-height:1.05;
-      margin-top:12px;
-      letter-spacing:.02em;
-      color:rgba(28,28,28,.95);
-      white-space:normal;
-      overflow-wrap:anywhere;
-      word-break:break-word;
+      font-size:44px;
+      line-height:1.02;
+      letter-spacing:.01em;
+      color:rgba(28,28,28,.92);
+      white-space:nowrap;              /* без переносов */
+      overflow:hidden;
+      text-overflow:ellipsis;
     }
     .sub{
       margin:12px 0 0;
       color:var(--muted);
-      font-size:15px;
-      line-height:1.7;
-      letter-spacing:.01em;
-      overflow-wrap:anywhere;
-      word-break:break-word;
+      font-size:15px; line-height:1.7; letter-spacing:.01em;
+      overflow-wrap:anywhere; word-break:break-word;
     }
 
-    .block{
-      margin-top:22px;
-      padding-top:18px;
-      border-top:1px solid var(--soft);
-    }
+    .block{ margin-top:22px; padding-top:18px; border-top:1px solid var(--soft); }
     .head{
-      display:flex;
-      justify-content:space-between;
-      align-items:baseline;
-      gap:10px;
-      margin-bottom:10px;
-      min-width:0;
+      display:flex; justify-content:space-between; align-items:baseline; gap:10px;
+      margin-bottom:10px; min-width:0;
     }
     .head h2{
-      margin:0;
-      font-size:20px;
-      font-weight:600;
-      letter-spacing:.04em;
+      margin:0; font-size:20px; font-weight:600; letter-spacing:.04em;
       color:rgba(28,28,28,.98);
     }
     .tag{
       font-family:Inter, system-ui, -apple-system, Segoe UI, Roboto, Arial;
-      font-size:10px;
-      letter-spacing:.28em;
-      text-transform:uppercase;
+      font-size:10px; letter-spacing:.28em; text-transform:uppercase;
       color:rgba(28,28,28,.65);
       white-space:nowrap;
     }
-
     .p{
-      margin:10px 0;
-      color:var(--muted);
-      font-size:15px;
-      line-height:1.75;
-      overflow-wrap:anywhere;
-      word-break:break-word;
+      margin:10px 0; color:var(--muted);
+      font-size:15px; line-height:1.75;
+      overflow-wrap:anywhere; word-break:break-word;
     }
     .p strong{
-      font-family:inherit;
-      font-size:15px;
-      font-weight:600;
-      letter-spacing:.04em;
+      font-family:inherit; font-size:15px; font-weight:600; letter-spacing:.04em;
       color:rgba(28,28,28,.98);
     }
 
-    /* Фото */
-.photo{
-  width:100%;
-  aspect-ratio: 3 / 4;          /* рамка как была */
-  border-radius:18px;
-  border:1px solid var(--soft);
-  overflow:hidden;
-  background: rgba(255,255,255,.85); /* красивый фон под пустые поля */
-}
-
-.photo img{
-  width:100%;
-  height:100%;
-  object-fit: contain;           /* ВАЖНО: фото целиком */
-  object-position: center;
-  padding: 10px;                 /* чтобы не прилипало к краям */
-  display:block;
-  filter: grayscale(100%) contrast(0.98) brightness(1.03);
-}
+    /* Фото: без белых отступов + просто меньше блок */
+    .photo{
+      width:100%;
+      max-width:520px;                 /* делает блок визуально меньше */
+      aspect-ratio: 16 / 10;           /* ниже по высоте */
+      border-radius:18px;
+      border:1px solid var(--soft);
+      overflow:hidden;
+      background:#fff;
+      margin-top:8px;
+      box-shadow:0 10px 26px rgba(0,0,0,.06);
+    }
+    .photo img{
+      width:100%;
+      height:100%;
+      object-fit:cover;                /* без полей */
+      object-position:center;
+      filter: grayscale(100%) contrast(0.98) brightness(1.03);
+    }
 
     /* Тайминг */
     .timeline{ margin-top:10px; }
     .tday{
-      margin-top:18px;
-      margin-bottom:6px;
+      margin-top:18px; margin-bottom:6px;
       font-family:Inter, system-ui, -apple-system, Segoe UI, Roboto, Arial;
-      font-size:14px;
-      font-weight:600;
-      letter-spacing:.28em;
-      text-transform:uppercase;
+      font-size:14px; font-weight:600; letter-spacing:.28em; text-transform:uppercase;
       color:rgba(28,28,28,.55);
       overflow-wrap:anywhere;
     }
-
     .titem{
-      display:grid;
-      grid-template-columns: 74px 1fr;
-      gap:12px;
-      padding:10px 0;
+      display:grid; grid-template-columns: 74px 1fr;
+      gap:12px; padding:10px 0;
       border-bottom:1px dashed rgba(0,0,0,.08);
       min-width:0;
     }
     .titem:last-child{ border-bottom:none; }
-
     .time{
       font-family:Inter, system-ui, -apple-system, Segoe UI, Roboto, Arial;
-      font-size:10px;
-      font-weight:500;
-      letter-spacing:.28em;
-      text-transform:uppercase;
+      font-size:10px; font-weight:500; letter-spacing:.28em; text-transform:uppercase;
       color:rgba(28,28,28,.55);
       padding-top:4px;
       white-space:nowrap;
     }
     .ttext{
       color:var(--muted);
-      font-size:15px;
-      line-height:1.6;
+      font-size:15px; line-height:1.6;
       min-width:0;
-      overflow-wrap:anywhere;
-      word-break:break-word;
+      overflow-wrap:anywhere; word-break:break-word;
     }
 
     /* Календарь */
@@ -271,25 +210,19 @@
       overflow:hidden;
     }
     .calTop{
-      display:flex;
-      justify-content:space-between;
-      align-items:center;
+      display:flex; justify-content:space-between; align-items:center;
       padding:12px 14px;
       border-bottom:1px solid var(--soft);
       gap:10px;
     }
     .calTop .month{
       font-family:Inter, system-ui, -apple-system, Segoe UI, Roboto, Arial;
-      font-size:10px;
-      letter-spacing:.22em;
-      text-transform:uppercase;
-      color:var(--muted);
-      white-space:nowrap;
+      font-size:10px; letter-spacing:.22em; text-transform:uppercase;
+      color:var(--muted); white-space:nowrap;
     }
     .calTop .date{
       font-family:"Parisienne", cursive;
-      font-size:26px;
-      color:var(--ink);
+      font-size:26px; color:var(--ink);
       white-space:nowrap;
     }
     .dow, .grid{ display:grid; grid-template-columns: repeat(7, 1fr); }
@@ -297,18 +230,14 @@
       padding:10px 0 8px;
       text-align:center;
       font-family:Inter, system-ui, -apple-system, Segoe UI, Roboto, Arial;
-      font-size:9px;
-      letter-spacing:.24em;
-      text-transform:uppercase;
+      font-size:9px; letter-spacing:.24em; text-transform:uppercase;
       color:var(--muted);
     }
     .grid button{
-      border:0;
-      background:transparent;
+      border:0; background:transparent;
       padding:10px 0;
       font-family:Inter, system-ui, -apple-system, Segoe UI, Roboto, Arial;
-      font-size:11px;
-      color:rgba(28,28,28,.9);
+      font-size:11px; color:rgba(28,28,28,.9);
       cursor:default;
     }
     .grid button.muted{ color:rgba(28,28,28,.22); }
@@ -347,24 +276,15 @@
       min-width:0;
     }
     .mini img{
-      width:100%;
-      height:100%;
+      width:100%; height:100%;
       object-fit:cover;
       filter: grayscale(100%) contrast(0.98) brightness(1.04);
     }
 
     /* Кнопки */
-    .btnRow{
-      display:flex;
-      gap:10px;
-      flex-wrap:wrap;
-      margin-top:14px;
-      min-width:0;
-    }
+    .btnRow{ display:flex; gap:10px; flex-wrap:wrap; margin-top:14px; min-width:0; }
     .btn{
-      display:inline-flex;
-      align-items:center;
-      justify-content:center;
+      display:inline-flex; align-items:center; justify-content:center;
       padding:12px 14px;
       border-radius:999px;
       border:1px solid var(--line);
@@ -372,15 +292,12 @@
       color:var(--ink);
       text-decoration:none;
       font-family:Inter, system-ui, -apple-system, Segoe UI, Roboto, Arial;
-      font-size:11px;
-      letter-spacing:.18em;
-      text-transform:uppercase;
+      font-size:11px; letter-spacing:.18em; text-transform:uppercase;
       cursor:pointer;
       white-space:nowrap;
       max-width:100%;
     }
     .btn:hover{ background:#fff; }
-
     .btnPrimary{
       background: rgba(28,28,28,.86);
       color: #fff;
@@ -403,9 +320,7 @@
     }
     .confirmTitle{
       font-family:Inter, system-ui, -apple-system, Segoe UI, Roboto, Arial;
-      font-size:11px;
-      letter-spacing:.28em;
-      text-transform:uppercase;
+      font-size:11px; letter-spacing:.28em; text-transform:uppercase;
       color:rgba(28,28,28,.55);
       margin-bottom:16px;
     }
@@ -424,11 +339,7 @@
       color:rgba(28,28,28,1);
       white-space:nowrap;
     }
-
-    .contactLine{
-      text-align:center;
-      margin-top:12px;
-    }
+    .contactLine{ text-align:center; margin-top:12px; }
     .contactLine a{
       text-decoration:none;
       color:rgba(28,28,28,.9);
@@ -439,10 +350,7 @@
       padding-bottom:2px;
       transition: all .15s ease;
     }
-    .contactLine a:hover{
-      border-color:rgba(28,28,28,.6);
-      color:rgba(28,28,28,1);
-    }
+    .contactLine a:hover{ border-color:rgba(28,28,28,.6); color:rgba(28,28,28,1); }
 
     /* Футер */
     .footerFull{
@@ -485,63 +393,61 @@
       margin-bottom:30px;
       white-space:nowrap;
     }
-    .footerSign .soft{
-      font-size:14px;
-      color:var(--muted);
-      margin-bottom:8px;
-    }
+    .footerSign .soft{ font-size:14px; color:var(--muted); margin-bottom:8px; }
     .namesBig{
       font-family:"Parisienne", cursive;
-      font-size:46px;
-      line-height:1.1;
+      font-size:46px; line-height:1.1;
       color:rgba(28,28,28,.95);
-      overflow-wrap:anywhere;
-      word-break:break-word;
+      overflow-wrap:anywhere; word-break:break-word;
     }
 
-    /* =========================
-       Mobile / iPhone adaptive
-       ========================= */
-
+    /* ===== Mobile: после фото идёт правый блок, а “Важно” — после календаря ===== */
     @media (max-width: 900px){
       .wrap{
         padding: 14px calc(12px + var(--safe-right)) calc(28px + var(--safe-bottom)) calc(12px + var(--safe-left));
       }
-      .content{ grid-template-columns: 1fr; }
-      .right{ border-left:none; border-top:1px solid var(--soft); }
-      .left,.right{ padding: 18px 14px 22px; }
 
-      h1{ font-size:34px; }
-      .titleSoft{ font-size:28px; }
-      .names{ font-size:40px; }
+      .content{
+        grid-template-columns: 1fr;
+        grid-template-areas:
+          "leftTop"
+          "right"
+          "leftInfo"; /* Важно после правого блока (в т.ч. календаря) */
+      }
+
+      .right{
+        border-left:none;
+        border-top:1px solid var(--soft);
+      }
+
+      .leftTop{ padding:18px 14px 14px; }
+      .right{ padding:18px 14px 22px; }
+      .leftInfo{ padding:0 14px 22px; }
+
+      h1{ font-size:32px; }
+      .titleSoft{ font-size:24px; margin-bottom:8px; }
+
+      /* чтобы имена всё равно влезали без переноса */
+      .names{
+        font-size:34px;
+        letter-spacing:.01em;
+      }
+
       .sub{ font-size:14px; }
 
       .titem{ grid-template-columns: 62px 1fr; gap:10px; }
       .calTop .date{ font-size:22px; }
 
-      .footerInner{
-        flex-direction: column;
-        align-items: stretch;
-        gap: 16px;
-      }
+      .photo{ max-width:100%; } /* на мобилке по ширине */
     }
 
     @media (max-width: 520px){
-      .top{
-        flex-wrap:wrap;
-        align-items:flex-start;
-        padding: 12px 14px;
-      }
-      .nav{
-        width:100%;
-        justify-content:flex-end;
-      }
+      .top{ flex-wrap:wrap; align-items:flex-start; padding: 12px 14px; }
+      .nav{ width:100%; justify-content:flex-end; }
       .nav a{ font-size:10px; padding:9px 11px; }
 
-      h1{ font-size:30px; line-height:1.15; }
-      .titleSoft{ font-size:24px; }
-      .names{ font-size:34px; line-height:1.05; }
-
+      h1{ font-size:28px; line-height:1.15; }
+      .names{ font-size:30px; } /* чтобы точно без переноса */
       .places{ grid-template-columns: 1fr; gap:8px; }
 
       .btnRow{ gap:8px; }
@@ -567,8 +473,8 @@
       </div>
 
       <div class="content">
-        <!-- LEFT -->
-        <div class="left">
+        <!-- LEFT TOP (заголовок + фото) -->
+        <div class="leftTop">
           <h1>
             <span class="titleSoft">Приглашение на свадьбу</span>
             <span class="names">Александра&nbsp;&nbsp;&amp;&nbsp;&nbsp;Ирины</span>
@@ -581,48 +487,7 @@
               <div class="tag">Фото</div>
             </div>
             <div class="photo">
-              <img src="invite.jpg" alt="Александр и Ирина">
-            </div>
-          </div>
-
-          <div class="block">
-            <div class="head">
-              <h2>Информация</h2>
-              <div class="tag">Важно</div>
-            </div>
-
-            <p class="p" style="margin-top:14px;">
-              <strong>Меню</strong><br/>
-              Меню разнообразное, поэтому сообщите нам заранее, если у вас есть какие-либо предпочтения или диетические ограничения.
-              После подтверждения вы сможете пройти опрос о своих вкусовых предпочтениях и напитках.
-            </p>
-
-            <p class="p">
-              <strong>Пожелания по подаркам</strong><br/>
-              Ваше присутствие в день нашей свадьбы — самый значимый подарок для нас!<br/>
-              Мы понимаем, что дарить цветы на свадьбу — это традиция, но мы не сможем насладиться их красотой в полной мере…<br/>
-              Будем рады любой другой альтернативе (вино или в денежном эквиваленте).
-            </p>
-
-            <p class="p">
-              <strong>Примечание</strong><br/>
-              Будем благодарны, если вы воздержитесь от криков «Горько» на празднике, ведь поцелуй — это знак выражения чувств,
-              он не может быть по заказу.
-            </p>
-
-            <div class="confirmBlock">
-              <div class="confirmTitle">Подтверждение</div>
-              <div class="confirmText">
-                Пожалуйста подтвердите свое присутствие<br>
-                до <span>31.05.2026</span>
-              </div>
-
-              <p class="p contactLine">
-                Если у вас есть вопросы — напишите нам<br>
-                <a href="https://t.me/qazwsxedcyy" target="_blank" rel="noopener">Ирина</a>
-                &nbsp;&nbsp;·&nbsp;&nbsp;
-                <a href="https://t.me/lee_eev" target="_blank" rel="noopener">Александр</a>
-              </p>
+              <img src="invite.png" alt="Александр и Ирина">
             </div>
           </div>
         </div>
@@ -719,8 +584,53 @@
             <p class="p" id="addrText" style="margin-top:12px;"></p>
           </div>
         </div>
-      </div>
-    </div>
+
+        <!-- LEFT INFO (Важно) -->
+        <div class="leftInfo">
+          <div class="block" style="border-top:none; padding-top:0; margin-top:0;">
+            <div class="head">
+              <h2>Информация</h2>
+              <div class="tag">Важно</div>
+            </div>
+
+            <p class="p" style="margin-top:14px;">
+              <strong>Меню</strong><br/>
+              Меню разнообразное, поэтому сообщите нам заранее, если у вас есть какие-либо предпочтения или диетические ограничения.
+              После подтверждения вы сможете пройти опрос о своих вкусовых предпочтениях и напитках.
+            </p>
+
+            <p class="p">
+              <strong>Пожелания по подаркам</strong><br/>
+              Ваше присутствие в день нашей свадьбы — самый значимый подарок для нас!<br/>
+              Мы понимаем, что дарить цветы на свадьбу — это традиция, но мы не сможем насладиться их красотой в полной мере…<br/>
+              Будем рады любой другой альтернативе (вино или в денежном эквиваленте).
+            </p>
+
+            <p class="p">
+              <strong>Примечание</strong><br/>
+              Будем благодарны, если вы воздержитесь от криков «Горько» на празднике, ведь поцелуй — это знак выражения чувств,
+              он не может быть по заказу.
+            </p>
+
+            <div class="confirmBlock">
+              <div class="confirmTitle">Подтверждение</div>
+              <div class="confirmText">
+                Пожалуйста подтвердите свое присутствие<br>
+                до <span>31.05.2026</span>
+              </div>
+
+              <p class="p contactLine">
+                Если у вас есть вопросы — напишите нам<br>
+                <a href="https://t.me/qazwsxedcyy" target="_blank" rel="noopener">Ирина</a>
+                &nbsp;&nbsp;·&nbsp;&nbsp;
+                <a href="https://t.me/lee_eev" target="_blank" rel="noopener">Александр</a>
+              </p>
+            </div>
+          </div>
+        </div>
+
+      </div><!-- /content -->
+    </div><!-- /sheet -->
 
     <div class="footerFull">
       <div class="footerInner">
@@ -730,7 +640,6 @@
 
         <div class="footerText">
           <a class="btn btnPrimary footerBtn" href="rsvp.html">Заполнить форму</a>
-
           <div class="footerSign">
             <div class="soft">С любовью,</div>
             <div class="namesBig">Александр и Ирина</div>
@@ -739,7 +648,7 @@
       </div>
     </div>
 
-  </div>
+  </div><!-- /wrap -->
 
   <script>
     // Адрес площадки
@@ -760,9 +669,7 @@
     const monthIndex = 7; // 0=Jan ... 7=Aug
     const selectedDay = 29;
 
-    function mondayFirstIndex(jsDay){ // jsDay: 0=Sun..6=Sat
-      return (jsDay + 6) % 7;
-    }
+    function mondayFirstIndex(jsDay){ return (jsDay + 6) % 7; }
 
     const grid = document.getElementById("calGrid");
     const first = new Date(year, monthIndex, 1);
@@ -786,4 +693,3 @@
   </script>
 </body>
 </html>
-
